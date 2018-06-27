@@ -25,7 +25,12 @@ public class InputNumberToEnglish {
   }
 
   /*
-    
+    passin the input array, and index to determinate handle single, tends or hundreds 
+    using remainder
+    If in last 3 digits, handle and done
+    If divisor is 1 or more, means in thousands, add the Word,
+    advance index and handle rest by incursive
+    if 
   */
   public static String convertToEnglishNumber(char[] inputArray, int index) {
     String output = "";
@@ -62,26 +67,20 @@ public class InputNumberToEnglish {
         break;
       
   }
-     System.out.println("-2--"+output);
-
     output += convertToEnglishNumber(inputArray, index+remainder);
-    System.out.println("--3-"+output);
-
     return output;
-
-  
   }
 
 
 
-
+  // call for single digit and add hundred, advance the index and handle tens
   public static String handleHundreds(char[] inputArray, int index, int divisor) {
     String result = handleSingleDigit(inputArray, index, divisor);
       result += "Hundred";
     return result+handleTens(inputArray, index + 1, divisor);
   }
 
-
+  // handle tends
   public static String handleTens(char[] inputArray, int index, int divisor) {
     String output = "";
 
@@ -101,6 +100,7 @@ public class InputNumberToEnglish {
     return output + handleSingleDigit(inputArray, index + 1, divisor);
   }
 
+  // handle two digits, under 20 or above, two cases
   public static String handleTwoDigit(char[] inputArray, int index, int divisor) {
     String output = "";
     String inputStr = new StringBuilder().append(inputArray[index]).append(inputArray[index+1]).toString();
